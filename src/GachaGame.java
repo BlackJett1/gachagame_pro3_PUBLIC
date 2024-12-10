@@ -356,6 +356,6 @@ public class GachaGame {
     }
 
     public void exitGame() {
-        System.out.println("Thanks for playing, no refunds allowed!!!");
+        System.out.println("Thanks for playing, no refunds ＼(￣O￣) ");
     }
 }
