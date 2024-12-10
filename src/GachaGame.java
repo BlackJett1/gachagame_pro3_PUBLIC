@@ -211,7 +211,7 @@ public class GachaGame {
 
         System.out.println("30 gems = $1");
         System.out.println("1500 gems = $50");
-        System.out.println("3000 gems = $1000");
+        System.out.println("3000 gems = $100");
         System.out.println("6500 gems = $200");
         System.out.println("18000 gems = $500");
 
