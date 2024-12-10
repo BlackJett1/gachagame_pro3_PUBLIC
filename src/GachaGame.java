@@ -1,26 +1,14 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.*;
 
 public class GachaGame {
     private int totalGem = 3000;
     private int bankM;
     private int totalPull = 0;
-    private int totalHome = 0;
-    private int totalHomeless = 0;
-    private int totalLoner = 0;
-    private int totalSleep = 0;
-    private int totalAqua = 0;
-    private int totalGamer = 0;
-    private int totalBlind = 0;
-    private int totalYellow = 0;
-    private int totalLight = 0;
-    private int totalBlue = 0;
-    private int totalPink = 0;
-    private int totalOrange = 0;
-    private int totalGreen = 0;
-    private int totalBlack = 0;
-    private int totalWhite = 0;
-    private int totalRed = 0;
-    private int totalPurple = 0;
+
+    private Map<String, Integer> spiritCounts = new HashMap<>();  // Map to track spirit counts by type and rarity
 
     private Scanner sc = new Scanner(System.in);
 
@@ -95,36 +83,55 @@ public class GachaGame {
 
     public void gachaPull() {
         double randomPull = Math.random() * 100;
+        Spirit pulledSpirit = null;
+
+        String type = "";
+        String rarity = "";
+
         if (randomPull <= 0.5) {
             int goldChance = (int)(Math.random() * 100);
             if (goldChance <= 30) {
-                totalHome++;
+                pulledSpirit = new Spirit("Home", "Gold");
+                type = "Home";
+                rarity = "Gold";
                 System.out.println("Home spirit (gold) pulled.");
             } else {
-                totalHomeless++;
+                pulledSpirit = new Spirit("Homeless", "Gold");
+                type = "Homeless";
+                rarity = "Gold";
                 System.out.println("Homeless spirit (gold) pulled.");
             }
         } else if (randomPull <= 5.0) {
             int epicPull = (int)(Math.random() * 5) + 1;
             switch (epicPull) {
                 case 1:
-                    totalLoner++;
+                    pulledSpirit = new Spirit("Loner", "Epic");
+                    type = "Loner";
+                    rarity = "Epic";
                     System.out.println("Loner spirit (epic) pulled.");
                     break;
                 case 2:
-                    totalSleep++;
+                    pulledSpirit = new Spirit("Sleep", "Epic");
+                    type = "Sleep";
+                    rarity = "Epic";
                     System.out.println("Sleep spirit (epic) pulled.");
                     break;
                 case 3:
-                    totalAqua++;
+                    pulledSpirit = new Spirit("Aqua", "Epic");
+                    type = "Aqua";
+                    rarity = "Epic";
                     System.out.println("Aqua spirit (epic) pulled.");
                     break;
                 case 4:
-                    totalGamer++;
+                    pulledSpirit = new Spirit("Gamer", "Epic");
+                    type = "Gamer";
+                    rarity = "Epic";
                     System.out.println("Gamer spirit (epic) pulled.");
                     break;
                 case 5:
-                    totalBlind++;
+                    pulledSpirit = new Spirit("Blind", "Epic");
+                    type = "Blind";
+                    rarity = "Epic";
                     System.out.println("Blind spirit (epic) pulled.");
                     break;
             }
@@ -132,75 +139,105 @@ public class GachaGame {
             int rarePull = (int)(Math.random() * 10) + 1;
             switch (rarePull) {
                 case 1:
-                    totalYellow++;
+                    pulledSpirit = new Spirit("Yellow", "Rare");
+                    type = "Yellow";
+                    rarity = "Rare";
                     System.out.println("Yellow spirit (rare) pulled.");
                     break;
                 case 2:
-                    totalLight++;
+                    pulledSpirit = new Spirit("Light", "Rare");
+                    type = "Light";
+                    rarity = "Rare";
                     System.out.println("Light spirit (rare) pulled.");
                     break;
                 case 3:
-                    totalBlue++;
+                    pulledSpirit = new Spirit("Blue", "Rare");
+                    type = "Blue";
+                    rarity = "Rare";
                     System.out.println("Blue spirit (rare) pulled.");
                     break;
                 case 4:
-                    totalPink++;
+                    pulledSpirit = new Spirit("Pink", "Rare");
+                    type = "Pink";
+                    rarity = "Rare";
                     System.out.println("Pink spirit (rare) pulled.");
                     break;
                 case 5:
-                    totalGreen++;
+                    pulledSpirit = new Spirit("Green", "Rare");
+                    type = "Green";
+                    rarity = "Rare";
                     System.out.println("Green spirit (rare) pulled.");
                     break;
                 case 6:
-                    totalOrange++;
+                    pulledSpirit = new Spirit("Orange", "Rare");
+                    type = "Orange";
+                    rarity = "Rare";
                     System.out.println("Orange spirit (rare) pulled.");
                     break;
                 case 7:
-                    totalBlack++;
+                    pulledSpirit = new Spirit("Black", "Rare");
+                    type = "Black";
+                    rarity = "Rare";
                     System.out.println("Black spirit (rare) pulled.");
                     break;
                 case 8:
-                    totalWhite++;
+                    pulledSpirit = new Spirit("White", "Rare");
+                    type = "White";
+                    rarity = "Rare";
                     System.out.println("White spirit (rare) pulled.");
                     break;
                 case 9:
-                    totalRed++;
+                    pulledSpirit = new Spirit("Red", "Rare");
+                    type = "Red";
+                    rarity = "Rare";
                     System.out.println("Red spirit (rare) pulled.");
                     break;
                 case 10:
-                    totalPurple++;
+                    pulledSpirit = new Spirit("Purple", "Rare");
+                    type = "Purple";
+                    rarity = "Rare";
                     System.out.println("Purple spirit (rare) pulled.");
                     break;
             }
         }
+
+
+        updateSpiritCount(type, rarity);
     }
 
+    public void updateSpiritCount(String type, String rarity) {
+        String key = type + " (" + rarity + ")";
+        spiritCounts.put(key, spiritCounts.getOrDefault(key, 0) + 1);
+    }
 
     public void checkForEndingConditions() {
         if (totalPull >= 70) {
             int goldChance = (int)(Math.random() * 100);
             if (goldChance <= 30) {
-                totalHome++;
+                updateSpiritCount("Home", "Gold");
                 System.out.println("Home spirit (gold) pulled.");
             } else {
-                totalHomeless++;
+                updateSpiritCount("Homeless", "Gold");
                 System.out.println("Homeless spirit (gold) pulled.");
             }
             totalPull = 0;
 
 
-            if (totalHome >= 4) {
-                System.out.println("After obtaining 4 home spirits: The spirits brought a sense of warmth, guiding you to where you belong, a dream that repeats all throughout winter, bringing joy and happiness, all year long (good ending)");
+            long homeCount = spiritCounts.getOrDefault("Home (Gold)", 0) + spiritCounts.getOrDefault("Home (Epic)", 0) + spiritCounts.getOrDefault("Home (Rare)", 0);
+            long homelessCount = spiritCounts.getOrDefault("Homeless (Gold)", 0) + spiritCounts.getOrDefault("Homeless (Epic)", 0) + spiritCounts.getOrDefault("Homeless (Rare)", 0);
+
+            if (homeCount >= 4) {
+                System.out.println("After obtaining 4 home spirits: The spirits brought a sense of warmth, guiding you to where you belong, a dream that repeats all throughout winter, bring joy and happiness, all year long (good ending)");
                 System.exit(0);
-            } else if (totalHomeless >= 4) {
-                System.out.println("After obtaining 4 homeless spirits: The spirits snapped you back to reality, the emptiness of your wallet dragged you deeply into your thoughts, you started to wonder the streets, while catching strays (bad ending)");
+            } else if (homelessCount >= 4) {
+                System.out.println("After obtaining 4 homeless spirits: The spirits snapped you back  to reality, the emptiness of your wallet dragged you deeply into your thoughts, you started to wonder the streets, while catching strays(bad ending)");
                 System.exit(0);
             }
         }
 
         // Normal Ending
         if (totalGem < 150 && bankM == 0) {
-            System.out.println("All money and gems used up: You are officially broke, good luck out there :) (Normal ending)");
+            System.out.println("All money and gems used up:You are official broke, good luck out there :D (Normal ending)");
             System.exit(0);
         }
     }
@@ -277,28 +314,45 @@ public class GachaGame {
     }
 
     public void displayCollection() {
-        System.out.println("---Rare spirits---");
-        System.out.println("Total Yellow spirits: " + totalYellow);
-        System.out.println("Total Light spirits: " + totalLight);
-        System.out.println("Total Blue spirits: " + totalBlue);
-        System.out.println("Total Pink spirits: " + totalPink);
-        System.out.println("Total Green spirits: " + totalGreen);
-        System.out.println("Total Orange spirits: " + totalOrange);
-        System.out.println("Total Black spirits: " + totalBlack);
-        System.out.println("Total White spirits: " + totalWhite);
-        System.out.println("Total Red spirits: " + totalRed);
-        System.out.println("Total Purple spirits: " + totalPurple);
+        // Create maps to store the spirits grouped by rarity
+        Map<String, Integer> rareSpirits = new TreeMap<>();
+        Map<String, Integer> epicSpirits = new TreeMap<>();
+        Map<String, Integer> goldSpirits = new TreeMap<>();
 
-        System.out.println("---Epic spirits---");
-        System.out.println("Total Loner spirits: " + totalLoner);
-        System.out.println("Total Sleep spirits: " + totalSleep);
-        System.out.println("Total Aqua spirits: " + totalAqua);
-        System.out.println("Total Gamer spirits: " + totalGamer);
-        System.out.println("Total Blind spirits: " + totalBlind);
+        // Iterate over the spiritCounts and sort them into the appropriate rarity map
+        for (Map.Entry<String, Integer> entry : spiritCounts.entrySet()) {
+            String spiritKey = entry.getKey();
+            int count = entry.getValue();
 
-        System.out.println("---Gold spirits---");
-        System.out.println("Total Home spirits: " + totalHome);
-        System.out.println("Total Homeless spirits: " + totalHomeless);
+            if (spiritKey.contains("Gold")) {
+                goldSpirits.put(spiritKey, count);
+            } else if (spiritKey.contains("Epic")) {
+                epicSpirits.put(spiritKey, count);
+            } else if (spiritKey.contains("Rare")) {
+                rareSpirits.put(spiritKey, count);
+            }
+        }
+
+        // Display the spirits ordered by rarity
+        System.out.println("---Your Collection---");
+
+        // Display Gold spirits first
+        System.out.println("\n---Gold Spirits---");
+        for (Map.Entry<String, Integer> entry : goldSpirits.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
+        }
+
+        // Display Epic spirits next
+        System.out.println("\n---Epic Spirits---");
+        for (Map.Entry<String, Integer> entry : epicSpirits.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
+        }
+
+        // Display Rare spirits last
+        System.out.println("\n---Rare Spirits---");
+        for (Map.Entry<String, Integer> entry : rareSpirits.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
+        }
     }
 
     public void exitGame() {
