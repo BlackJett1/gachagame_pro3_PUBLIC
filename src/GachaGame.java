@@ -8,7 +8,7 @@ public class GachaGame {
     private int bankM;
     private int totalPull = 0;
 
-    private Map<String, Integer> spiritCounts = new HashMap<>();  // Map to track spirit counts by type and rarity
+    private Map<String, Integer> spiritCounts = new HashMap<>();
 
     private Scanner sc = new Scanner(System.in);
 
@@ -235,7 +235,7 @@ public class GachaGame {
             }
         }
 
-        // Normal Ending
+
         if (totalGem < 150 && bankM == 0) {
             System.out.println("All money and gems used up:You are official broke, good luck out there :D (Normal ending)");
             System.exit(0);
@@ -314,12 +314,12 @@ public class GachaGame {
     }
 
     public void displayCollection() {
-        // Create maps to store the spirits grouped by rarity
+
         Map<String, Integer> rareSpirits = new TreeMap<>();
         Map<String, Integer> epicSpirits = new TreeMap<>();
         Map<String, Integer> goldSpirits = new TreeMap<>();
 
-        // Iterate over the spiritCounts and sort them into the appropriate rarity map
+
         for (Map.Entry<String, Integer> entry : spiritCounts.entrySet()) {
             String spiritKey = entry.getKey();
             int count = entry.getValue();
@@ -333,22 +333,22 @@ public class GachaGame {
             }
         }
 
-        // Display the spirits ordered by rarity
+
         System.out.println("---Your Collection---");
 
-        // Display Gold spirits first
+
         System.out.println("\n---Gold Spirits---");
         for (Map.Entry<String, Integer> entry : goldSpirits.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
         }
 
-        // Display Epic spirits next
+
         System.out.println("\n---Epic Spirits---");
         for (Map.Entry<String, Integer> entry : epicSpirits.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
         }
 
-        // Display Rare spirits last
+
         System.out.println("\n---Rare Spirits---");
         for (Map.Entry<String, Integer> entry : rareSpirits.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " pulled");
